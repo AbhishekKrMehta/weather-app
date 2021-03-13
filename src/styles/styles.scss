@@ -1,0 +1,15 @@
+// TODO: remove unused @use
+
+@use '~src/styles/colors';
+@use '~src/styles/functions';
+@use '~src/styles/mixins';
+@use '~src/styles/typography';
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
