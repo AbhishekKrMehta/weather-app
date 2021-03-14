@@ -11,8 +11,13 @@
   padding: functions.compute-pixel(4);
 
   .accordion {
-    mat-expansion-panel {
+    .expansion-panel {
       background: #424242bd;
+    }
+
+    .panel-description {
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

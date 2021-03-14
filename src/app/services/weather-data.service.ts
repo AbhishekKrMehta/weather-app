@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { GlobalConstants } from '../global-constants';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { WeatherData } from '../interfaces/weather-data.interface';
+import { WeatherDataResponse } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +12,56 @@ export class WeatherDataService {
 
   constructor(private http: HttpClient) { }
 
-  public getWeatherdata(cityName: string): Observable<WeatherData> {
+  public getWeatherdata(cityName: string): Observable<WeatherDataResponse> {
     const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${GlobalConstants.apiKey}`;
-    console.log(`🚀 ~ file: weather-data.service.ts ~ line 17 ~ getWeatherdata ~ url`, url);
-    return this.http.get<WeatherData>(url)
-      .pipe(
-        retry(2),
-        catchError(this.handleError)
-      );
+
+    return of({
+      coord: {
+        lon: 4.8897,
+        lat: 52.374
+      },
+      weather: [{
+        id: 803,
+        main: 'Clouds',
+        description: 'broken clouds',
+        icon: '04d'
+      }],
+      base: 'stations',
+      main: {
+        temp: 280.58,
+        feels_like: 273.93,
+        temp_min: 279.82,
+        temp_max: 280.93,
+        pressure: 1008,
+        humidity: 81
+      },
+      visibility: 10000,
+      wind: {
+        speed: 7.72,
+        deg: 290
+      },
+      clouds: {
+        all: 75
+      },
+      dt: 1615716401,
+      sys: {
+        type: 1,
+        id: 1524,
+        country: 'NL',
+        sunrise: 1615701420,
+        sunset: 1615743743
+      },
+      timezone: 3600,
+      id: 2759794,
+      name: 'Amsterdam',
+      cod: 200
+    })
+
+    // return this.http.get<WeatherDataResponse>(url)
+    //   .pipe(
+    //     retry(2),
+    //     catchError(this.handleError)
+    //   );
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

@@ -1,12 +1,13 @@
 <div class="homepage-container">
   <mat-accordion class="accordion">
-    <mat-expansion-panel>
+    <mat-expansion-panel *ngFor="let city of weatherDataResponse" class="expansion-panel">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          This is the expansion title
+          {{city.name}}
         </mat-panel-title>
-        <mat-panel-description>
-          This is a summary of the content
+        <mat-panel-description class="panel-description">
+          <span>Avergae Temperature: {{(city.main.temp_max + city.main.temp_min)/2 }}</span>
+          <span>Wind Speed: {{city.wind.speed}}</span>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <p>This is the primary content of the panel.</p>
