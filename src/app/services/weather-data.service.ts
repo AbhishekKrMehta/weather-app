@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { GlobalConstants } from '../global-constants';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { WeatherDataResponse } from '../interfaces';
+import { CurrentWeatherResponse, HourlyWeatherResponse } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,8 @@ export class WeatherDataService {
 
   constructor(private http: HttpClient) { }
 
-  public getWeatherdata(cityName: string): Observable<WeatherDataResponse> {
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${GlobalConstants.apiKey}`;
+  public getCurrentWeatherData(cityName: string): Observable<CurrentWeatherResponse> {
+    const currentWeatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${GlobalConstants.apiKey}`;
 
     return of({
       coord: {
@@ -55,13 +55,22 @@ export class WeatherDataService {
       id: 2759794,
       name: 'Amsterdam',
       cod: 200
-    })
+    });
 
-    // return this.http.get<WeatherDataResponse>(url)
+    // return this.http.get<CurrentWeatherResponse>(currentWeatherUrl)
     //   .pipe(
     //     retry(2),
     //     catchError(this.handleError)
     //   );
+  }
+
+  public getHourlyWeatherData(latitude: string, longitude: string): Observable<HourlyWeatherResponse> {
+    const hourlyWeatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,daily,alerts&appid=${GlobalConstants.apiKey}`;
+    return this.http.get<HourlyWeatherResponse>(hourlyWeatherUrl)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

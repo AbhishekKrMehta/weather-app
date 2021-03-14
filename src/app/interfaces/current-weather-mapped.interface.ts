@@ -1,4 +1,4 @@
-export interface WeatherDataRequired {
+export interface CurrentWeatherMapped {
   currentWeather: WeatherDetails;
   forecast: WeatherDetails;
 }
@@ -10,7 +10,7 @@ interface WeatherDetails {
   coordinates: Coordinates;
 }
 
-interface Coordinates {
+export interface Coordinates {
   latitude: number;
   longitude: number;
 }

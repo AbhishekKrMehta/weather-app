@@ -10,12 +10,14 @@ import { ContentComponent } from './components/content/content.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { WeatherDataService } from './services/weather-data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ForecastComponent } from './components/forecast/forecast.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContentComponent,
     HomepageComponent,
+    ForecastComponent,
     FooterComponent
   ],
   imports: [

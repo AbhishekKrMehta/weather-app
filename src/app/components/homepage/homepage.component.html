@@ -1,6 +1,6 @@
 <div class="homepage-container">
   <mat-accordion class="accordion">
-    <mat-expansion-panel *ngFor="let city of weatherDataResponse" class="expansion-panel">
+    <mat-expansion-panel *ngFor="let city of currentWeatherResponse" class="expansion-panel">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{city.name}}
@@ -10,7 +10,10 @@
           <span>Wind Speed: {{city.wind.speed}}</span>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <p>This is the primary content of the panel.</p>
+      <!-- this loads the forecast upon clicking on the city -->
+      <ng-template matExpansionPanelContent>
+        <app-forecast [coordinates]="city.coord"></app-forecast>
+      </ng-template>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

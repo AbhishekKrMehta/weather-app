@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { forkJoin, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { WeatherDataResponse, WeatherDataRequired } from 'src/app/interfaces';
+import { CurrentWeatherResponse, CurrentWeatherMapped } from 'src/app/interfaces';
 import { WeatherDataService } from 'src/app/services/weather-data.service';
 
 @Component({
@@ -11,8 +11,8 @@ import { WeatherDataService } from 'src/app/services/weather-data.service';
 })
 
 export class HomepageComponent implements OnInit, OnDestroy {
-  weatherDataResponse!: Array<WeatherDataResponse>;
-  weatherDataRequired!: Array<WeatherDataRequired>;
+  currentWeatherResponse!: Array<CurrentWeatherResponse>;
+  currentWeatherMapped!: Array<CurrentWeatherMapped>;
   citiesList: string[] = ['Amsterdam', 'Woodinville', 'Krasnoyarsk', 'Stockholm', 'Beijing'];
   private unsubscribe$ = new Subject();
 
@@ -23,9 +23,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
 
   private initWeatherData(): void {
-    forkJoin(this.citiesList.map((city) => this.weatherDataService.getWeatherdata(city)))
+    forkJoin(this.citiesList.map((city) => this.weatherDataService.getCurrentWeatherData(city)))
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response: Array<WeatherDataResponse>) => this.weatherDataResponse = response);
+      .subscribe((response: Array<CurrentWeatherResponse>) => this.currentWeatherResponse = response);
   }
 
   ngOnDestroy(): void {
