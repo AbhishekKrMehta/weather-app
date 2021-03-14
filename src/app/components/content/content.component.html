@@ -1,0 +1,19 @@
+<mat-toolbar class="header" color="primary">
+  <button mat-icon-button (click)="sidenav.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a routerLink="/home" class="header__link">
+    <h1>WEATHER APP</h1>
+    <mat-icon>wb_sunny</mat-icon>
+  </a>
+</mat-toolbar>
+<mat-progress-bar *ngIf="!showLoader" mode="indeterminate" color="warn"></mat-progress-bar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" opened class="sidenav" fixedInViewport="false">
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

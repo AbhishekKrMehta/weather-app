@@ -1,0 +1,32 @@
+@use '~src/styles/functions';
+@use '~src/styles/constants';
+
+.header {
+  &__link {
+    display: flex;
+    align-items: center;
+    margin-left: functions.compute-pixel(2);
+    text-decoration: none;
+    color: white;
+    height: constants.$header-height;
+
+    mat-icon {
+      margin-left: functions.compute-pixel(1.5);
+    }
+  }
+}
+
+.sidenav-container {
+  position: absolute;
+  top: constants.$header-height;
+  bottom: constants.$footer-height;
+  left: 0;
+  right: 0;
+
+  .sidenav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+  }
+}

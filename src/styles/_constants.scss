@@ -1,0 +1,4 @@
+@use '~src/styles/functions';
+
+$header-height: functions.compute-pixel(7.5);
+$footer-height: functions.compute-pixel(7);

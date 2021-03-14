@@ -1,0 +1,32 @@
+@use '~src/styles/colors';
+@use '~src/styles/functions';
+@use '~src/styles/typography';
+@use '~src/styles/constants';
+
+.footer {
+  font-size: typography.$text-font-size;
+  display: flex;
+  justify-content: space-between;
+  height: constants.$footer-height;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  &__developer {
+    font-size: functions.compute-pixel(2);
+    font-weight: 100;
+
+    a {
+      color: #303030;
+      margin-left: functions.compute-pixel(1);
+      text-decoration: none;
+    }
+  }
+
+  &__attribution {
+    display: flex;
+    &__image {
+      height: functions.compute-pixel(5);
+    }
+  }
+}

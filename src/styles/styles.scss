@@ -12,4 +12,12 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-weight: 100;
 }
+
+@import '~@angular/material/theming';
+// Define a custom typography config
+$custom-typography: mat-typography-config(
+  $font-family: "Copperplate, ' Copperplate Gothic Light ', fantasy, Roboto, monospace",
+);
+@include mat-core($custom-typography);

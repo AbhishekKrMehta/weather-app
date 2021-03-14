@@ -1,0 +1,5 @@
+$multiplier: 8;
+
+@function compute-pixel($value) {
+  @return $value * $multiplier + px;
+}
