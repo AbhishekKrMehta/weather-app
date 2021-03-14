@@ -8,6 +8,8 @@ import { MaterialModule } from './material.module';
 import { FooterComponent } from './components/footer/footer.component';
 import { ContentComponent } from './components/content/content.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { WeatherDataService } from './services/weather-data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,9 +22,10 @@ import { HomepageComponent } from './components/homepage/homepage.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [WeatherDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
