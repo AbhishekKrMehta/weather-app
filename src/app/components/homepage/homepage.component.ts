@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormArray, FormControl } from '@angular/forms';
 import { forkJoin, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { CurrentWeatherResponse, CurrentWeatherMapped } from 'src/app/interfaces';
@@ -14,12 +15,18 @@ export class HomepageComponent implements OnInit, OnDestroy {
   currentWeatherResponse!: Array<CurrentWeatherResponse>;
   currentWeatherMapped!: Array<CurrentWeatherMapped>;
   citiesList: string[] = ['Amsterdam', 'Woodinville', 'Krasnoyarsk', 'Stockholm', 'Beijing'];
+  citiesFormArray = new FormArray([]);
+
   private unsubscribe$ = new Subject();
 
   constructor(private weatherDataService: WeatherDataService) { }
 
   ngOnInit(): void {
     this.initWeatherData();
+    this.citiesList.forEach(city => {
+      this.citiesFormArray.push(new FormControl(''));
+    });
+    console.log(`🚀 ~ file: homepage.component.ts ~ line 28 ~ ngOnInit ~ this.citiesFormArray`, this.citiesFormArray);
   }
 
   private initWeatherData(): void {

@@ -1,19 +1,23 @@
 <div class="homepage-container">
   <mat-accordion class="accordion">
-    <mat-expansion-panel *ngFor="let city of currentWeatherResponse" class="expansion-panel">
+    <!-- <mat-expansion-panel *ngFor="let city of currentWeatherResponse" class="expansion-panel"> -->
+    <mat-expansion-panel *ngFor="let city of citiesFormArray.controls; index as i" class="expansion-panel">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          {{city.name}}
+          <input [formControl]="citiesFormArray['controls'][i]" />
+          <!-- FIXME change this to formgroup -->
         </mat-panel-title>
         <mat-panel-description class="panel-description">
-          <span>Avergae Temperature: {{(city.main.temp_max + city.main.temp_min)/2 }}</span>
-          <span>Wind Speed: {{city.wind.speed}}</span>
+          <!-- <span>Avergae Temperature: {{(city.main.temp_max + city.main.temp_min)/2 }}</span>
+          <span>Wind Speed: {{city.wind.speed}}</span> -->
         </mat-panel-description>
       </mat-expansion-panel-header>
       <!-- this loads the forecast upon clicking on the city -->
       <ng-template matExpansionPanelContent>
-        <app-forecast [coordinates]="city.coord"></app-forecast>
+        <app-forecast [coordinates]=""></app-forecast>
       </ng-template>
     </mat-expansion-panel>
   </mat-accordion>
 </div>
+
+<pre>{{citiesFormArray.value | json}}</pre>
