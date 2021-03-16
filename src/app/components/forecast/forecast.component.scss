@@ -1,0 +1,18 @@
+@use '~src/styles/functions';
+
+.forecast{
+    
+    &__container{
+
+    }
+    
+    &__row{
+        display: flex;
+        justify-content: space-around;
+        padding: functions.compute-pixel(2);
+        p {
+            margin: 0;
+        }
+
+    }
+}

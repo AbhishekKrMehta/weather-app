@@ -16,7 +16,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
   currentWeatherMapped!: Array<CurrentWeatherMapped>;
   citiesList: string[] = ['Amsterdam', 'Woodinville', 'Krasnoyarsk', 'Stockholm', 'Beijing'];
   citiesFormArray = new FormArray([]);
-
   private unsubscribe$ = new Subject();
 
   constructor(private weatherDataService: WeatherDataService) { }
@@ -32,7 +31,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
   private initWeatherData(): void {
     forkJoin(this.citiesList.map((city) => this.weatherDataService.getCurrentWeatherData(city)))
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response: Array<CurrentWeatherResponse>) => this.currentWeatherResponse = response);
+      .subscribe((response: Array<CurrentWeatherResponse>) => this.currentWeatherResponse = response);//map the response
   }
 
   ngOnDestroy(): void {

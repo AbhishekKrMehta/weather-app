@@ -1,19 +1,34 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Coordinates } from 'src/app/interfaces';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { pipe, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Coordinates, HourlyForecast, HourlyWeatherResponse } from 'src/app/interfaces';
+import { WeatherDataService } from 'src/app/services/weather-data.service';
 
 @Component({
   selector: 'app-forecast',
   templateUrl: './forecast.component.html',
   styleUrls: ['./forecast.component.scss']
 })
-export class ForecastComponent implements OnInit {
-  // @Input() coordinates!: Coordinates; TODO
-  @Input() coordinates!: any;
+export class ForecastComponent implements OnInit,OnDestroy {
+  @Input() coordinates!: Coordinates;
+  // hourlyForecastList!:Array<HourlyForecast>;
+  hourlyForecastList!:any;
+  private unsubscribe$ = new Subject();
 
-  constructor() { }
+  constructor(private weatherDataService: WeatherDataService) { }
 
   ngOnInit(): void {
-    console.log('in forecast')
+    this.initForecastData();
   }
 
+  private initForecastData(): void {
+    this.weatherDataService.getHourlyWeatherData('city','test')
+    .pipe(takeUntil(this.unsubscribe$))
+    .subscribe((response: HourlyWeatherResponse) => this.hourlyForecastList = response);
+    }
+
+    ngOnDestroy(): void {
+      this.unsubscribe$.next();
+      this.unsubscribe$.complete();
+    }
 }
