@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl } from '@angular/forms';
 import { forkJoin, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { CurrentWeatherResponse, CurrentWeatherMapped } from 'src/app/interfaces';
 import { WeatherDataService } from 'src/app/services/weather-data.service';
 
@@ -12,8 +12,7 @@ import { WeatherDataService } from 'src/app/services/weather-data.service';
 })
 
 export class HomepageComponent implements OnInit, OnDestroy {
-  currentWeatherResponse!: Array<CurrentWeatherResponse>;
-  currentWeatherMapped!: Array<CurrentWeatherMapped>;
+  currentWeatherMappedList!: Array<CurrentWeatherMapped>;
   citiesList: string[] = ['Amsterdam', 'Woodinville', 'Krasnoyarsk', 'Stockholm', 'Beijing'];
   citiesFormArray = new FormArray([]);
   private unsubscribe$ = new Subject();
@@ -25,13 +24,36 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.citiesList.forEach(city => {
       this.citiesFormArray.push(new FormControl(''));
     });
-    console.log(`🚀 ~ file: homepage.component.ts ~ line 28 ~ ngOnInit ~ this.citiesFormArray`, this.citiesFormArray);
   }
 
   private initWeatherData(): void {
-    forkJoin(this.citiesList.map((city) => this.weatherDataService.getCurrentWeatherData(city)))
+    forkJoin(
+      this.citiesList.map((cityName) => this.weatherDataService.getCurrentWeatherData(cityName)
+        .pipe(
+          map((response: CurrentWeatherResponse) => this.mapCurrentWeatherResponse(cityName, response))
+          // map the api response as per the frontend requirement
+        ))
+    )
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response: Array<CurrentWeatherResponse>) => this.currentWeatherResponse = response);//map the response
+      .subscribe((mappedResponse: Array<CurrentWeatherMapped>) => this.currentWeatherMappedList = mappedResponse);
+  }
+
+  private mapCurrentWeatherResponse(cityName: string, response: CurrentWeatherResponse): CurrentWeatherMapped {
+    return {
+      cityName,
+      averageTemperature: {
+        value: (response.main.temp_min + response.main.temp_max) / 2,
+        unit: 'celcius' // TODO
+      },
+      coordinates: {
+        latitude: response.coord.lat,
+        longitude: response.coord.lon
+      },
+      windStrength: {
+        value: response.wind.speed,
+        unit: 'km/hr' // TODO
+      }
+    };
   }
 
   ngOnDestroy(): void {

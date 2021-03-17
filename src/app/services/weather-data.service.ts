@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { GlobalConstants } from '../global-constants';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { CurrentWeatherResponse, HourlyWeatherResponse } from '../interfaces';
+import { Coordinates, CurrentWeatherResponse, HourlyForecastResponse } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -64,9 +64,9 @@ export class WeatherDataService {
     //   );
   }
 
-  public getHourlyWeatherData(latitude: string, longitude: string): Observable<HourlyWeatherResponse> {
+  public getHourlyWeatherData({ latitude, longitude }: Coordinates): Observable<HourlyForecastResponse> {
     const hourlyWeatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,daily,alerts&appid=${GlobalConstants.apiKey}`;
-    return this.http.get<HourlyWeatherResponse>(hourlyWeatherUrl)
+    return this.http.get<HourlyForecastResponse>(hourlyWeatherUrl)
       .pipe(
         retry(2),
         catchError(this.handleError)

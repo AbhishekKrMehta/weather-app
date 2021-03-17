@@ -1,20 +1,21 @@
 <div class="homepage-container">
   <mat-accordion class="accordion">
     <!-- <mat-expansion-panel *ngFor="let city of currentWeatherResponse" class="expansion-panel"> -->
-    <mat-expansion-panel *ngFor="let city of citiesFormArray.controls; index as i" class="expansion-panel">
+    <mat-expansion-panel *ngFor="let weather of currentWeatherMappedList; index as i" class="expansion-panel">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <!-- <input [formControl]="citiesFormArray['controls'][i]" /> -->test
           <!-- FIXME change this to formgroup -->
+          {{ weather.cityName }}
         </mat-panel-title>
         <mat-panel-description class="panel-description">
-          <!-- <span>Avergae Temperature: {{(city.main.temp_max + city.main.temp_min)/2 }}</span>
-          <span>Wind Speed: {{city.wind.speed}}</span> -->
+          <span>Avergae Temperature: {{ weather.averageTemperature.value + weather.averageTemperature.unit}}</span>
+          <span>Wind Speed: {{ weather.windStrength.value + weather.windStrength.unit }}</span>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <!-- this loads the forecast upon clicking on the city -->
+      <!-- this loads the hourly forecast upon clicking on the city -->
       <ng-template matExpansionPanelContent>
-        <app-forecast [coordinates]=""></app-forecast>
+        <app-forecast [coordinates]="weather.coordinates"></app-forecast>
       </ng-template>
     </mat-expansion-panel>
   </mat-accordion>

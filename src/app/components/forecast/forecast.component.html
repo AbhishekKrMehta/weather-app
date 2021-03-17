@@ -1,10 +1,12 @@
-<div *ngFor="let forecast of hourlyForecastList" class="forecast__container">
-  <div class="forecast__row">
-    <span>time: 9:00 PM </span>
-    <span>Avergae Temperature: 1121</span>
-    <span>Wind Speed: 1118</span>
-    <!-- <span>Avergae Temperature: {{(city.main.temp_max + city.main.temp_min)/2 }}</span>
-  <span>Wind Speed: {{city.wind.speed}}</span> -->
+<mat-spinner *ngIf="!hourlyForecastMappedList;else dataLoaded"></mat-spinner>
+
+<ng-template #dataLoaded>
+  <div *ngFor="let forecast of hourlyForecastMappedList" class="forecast">
+    <div class="forecast__row">
+      <span>time: {{ forecast.time | date:'h:mm a'}}</span>
+      <span>Avergae Temperature: {{forecast.averageTemperature.value + forecast.averageTemperature.unit }}</span>
+      <span>Wind Speed: {{forecast.windSpeed.value + forecast.windSpeed.value}}</span>
+    </div>
+    <mat-divider></mat-divider>
   </div>
-  <mat-divider></mat-divider>
-</div>
+</ng-template>

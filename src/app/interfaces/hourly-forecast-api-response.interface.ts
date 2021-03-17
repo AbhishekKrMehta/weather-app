@@ -1,11 +1,11 @@
-export interface HourlyWeatherResponse {
+export interface HourlyForecastResponse {
   lat: number;
   lon: number;
   timezone: string;
   timezone_offset: number;
   current?: Current;
   minutely?: Minutely[];
-  hourly?: Current[];
+  hourly: Current[];
   daily?: Daily[];
 }
 
