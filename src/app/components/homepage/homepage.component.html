@@ -1,14 +1,15 @@
 <mat-progress-bar *ngIf="showLoader" mode="indeterminate" color="warn"></mat-progress-bar>
 <div class="homepage-container">
-  <mat-accordion class="accordion">
-    <!-- <mat-expansion-panel *ngFor="let city of currentWeatherResponse" class="expansion-panel"> -->
+
+  <mat-accordion class="headers-align accordion">
     <mat-expansion-panel *ngFor="let weather of currentWeatherMappedList; index as i" class="expansion-panel">
-      <mat-expansion-panel-header>
+      <mat-expansion-panel-header [collapsedHeight]="'100px'">
         <mat-panel-title>
           <!-- <input [formControl]="citiesFormArray['controls'][i]" /> -->
           <!-- FIXME change this to formgroup -->
           {{ weather.cityName }}
         </mat-panel-title>
+
         <mat-panel-description class="panel-description">
           <span>Avergae Temperature:
             <span class="temperature-value">
@@ -21,11 +22,15 @@
             </span>
           </span>
         </mat-panel-description>
+
       </mat-expansion-panel-header>
+
       <!-- this loads the hourly forecast upon clicking on the city -->
       <ng-template matExpansionPanelContent>
         <app-forecast [coordinates]="weather.coordinates"></app-forecast>
       </ng-template>
     </mat-expansion-panel>
+
   </mat-accordion>
+
 </div>
