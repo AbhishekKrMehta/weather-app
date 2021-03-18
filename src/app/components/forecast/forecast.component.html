@@ -1,12 +1,29 @@
-<mat-spinner *ngIf="!hourlyForecastMappedList;else dataLoaded"></mat-spinner>
+<mat-spinner *ngIf="showSpinner"></mat-spinner>
 
-<ng-template #dataLoaded>
-  <div *ngFor="let forecast of hourlyForecastMappedList" class="forecast">
-    <div class="forecast__row">
-      <span>time: {{ forecast.time | date:'h:mm a'}}</span>
-      <span>Avergae Temperature: {{forecast.averageTemperature.value + forecast.averageTemperature.unit }}</span>
-      <span>Wind Speed: {{forecast.windSpeed.value + forecast.windSpeed.value}}</span>
-    </div>
-    <mat-divider></mat-divider>
-  </div>
-</ng-template>
+<div [hidden]="showSpinner" class="mat-elevation-z8">
+  <table class="forecast-table" mat-table [dataSource]="tableData.dataSource">
+
+    <!-- Time -->
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef> Time </th>
+      <td mat-cell *matCellDef="let element"> {{element.time | date:'h:mm a'}} </td>
+    </ng-container>
+
+    <!-- Average Temperature -->
+    <ng-container matColumnDef="averageTemperature">
+      <th mat-header-cell *matHeaderCellDef> Average Temperature </th>
+      <td mat-cell *matCellDef="let element"> {{element.averageTemperature}} </td>
+    </ng-container>
+
+    <!-- Wind Speed -->
+    <ng-container matColumnDef="windSpeed">
+      <th mat-header-cell *matHeaderCellDef> Wind Speed </th>
+      <td mat-cell *matCellDef="let element"> {{element.windSpeed}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableData.displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: tableData.displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

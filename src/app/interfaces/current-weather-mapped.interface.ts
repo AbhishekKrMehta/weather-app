@@ -1,8 +1,8 @@
-import { Temperature, WindSpeed, Coordinates } from './common.interface';
+import { Coordinates } from './common.interface';
 
 export interface CurrentWeatherMapped {
   cityName: string;
-  averageTemperature: Temperature;
-  windStrength: WindSpeed;
+  averageTemperature: number;
+  windStrength: number;
   coordinates: Coordinates;
 }

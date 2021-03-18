@@ -1,16 +1,9 @@
 @use '~src/styles/functions';
 
-.forecast {
-  &__row {
-    display: flex;
-    justify-content: space-around;
-    padding: functions.compute-pixel(2);
-    p {
-      margin: 0;
-    }
-  }
-}
-
 mat-spinner {
   margin: functions.compute-pixel(2) auto;
+}
+
+.forecast-table {
+  width: 100%;
 }
