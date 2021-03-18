@@ -1,5 +1,9 @@
 import { Component, OnDestroy, ChangeDetectorRef, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { Unit } from 'src/app/enums/global.enum';
+import { UnitSelectorService } from 'src/app/services/unit-selector.service';
 
 @Component({
   selector: 'app-content',
@@ -7,7 +11,6 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./content.component.scss']
 })
 export class ContentComponent implements OnInit, OnDestroy {
-  showLoader = true; // TODO: use it
   unitList = [{
     name: 'Standard',
     value: 'standard'
@@ -19,13 +22,20 @@ export class ContentComponent implements OnInit, OnDestroy {
     name: 'Imperial',
     value: 'imperial'
   }];
-  unitControl = new FormControl(this.unitList[0].value);
+  unitControl = new FormControl(this.unitList[1].value); // select default unit as metric
+  showLoader = true; // TODO: use it
+  private unsubscribe$ = new Subject();
 
-  constructor() { }
+  constructor(private unitSelectorService: UnitSelectorService) { }
 
   ngOnInit(): void {
-
+    this.unitControl.valueChanges
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((selectedUnit: Unit) => this.unitSelectorService.emitUnitChange(selectedUnit));
   }
 
-  ngOnDestroy(): void { }
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 }

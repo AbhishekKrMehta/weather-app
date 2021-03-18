@@ -16,6 +16,11 @@ export class WeatherDataService {
   public getCurrentWeatherData(cityName: string, unit: Unit = Unit.metric): Observable<CurrentWeatherResponse> {
     const currentWeatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${GlobalConstants.apiKey}&units=${unit}`;
 
+    return this.http.get<CurrentWeatherResponse>(currentWeatherUrl)
+      .pipe(
+        retry(2),
+        catchError(this.handleError)
+      );
     return of({
       coord: {
         lon: 4.8897,
@@ -58,15 +63,10 @@ export class WeatherDataService {
       cod: 200
     });
 
-    // return this.http.get<CurrentWeatherResponse>(currentWeatherUrl)
-    //   .pipe(
-    //     retry(2),
-    //     catchError(this.handleError)
-    //   );
   }
 
-  public getHourlyWeatherData({ latitude, longitude }: Coordinates): Observable<HourlyForecastResponse> {
-    const hourlyWeatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,daily,alerts&appid=${GlobalConstants.apiKey}`;
+  public getHourlyWeatherData({ latitude, longitude }: Coordinates, unit: Unit = Unit.metric): Observable<HourlyForecastResponse> {
+    const hourlyWeatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=current,minutely,daily,alerts&appid=${GlobalConstants.apiKey}&units=${unit}`;
     return this.http.get<HourlyForecastResponse>(hourlyWeatherUrl)
       .pipe(
         retry(2),

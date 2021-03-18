@@ -20,8 +20,8 @@ body {
 }
 
 @import '~@angular/material/theming';
-// Define a custom typography config
-// $font-family: "Copperplate, ' Copperplate Gothic Light ', fantasy, Roboto, monospace",
+// define a custom typography config
+// $font-family: "Copperplate, ' Copperplate Gothic Light ', fantasy, Roboto, monospace", // TODO
 $custom-typography: mat-typography-config(
   $font-family: ' Roboto, monospace',
 );

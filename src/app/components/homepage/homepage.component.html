@@ -1,3 +1,4 @@
+<mat-progress-bar *ngIf="showLoader" mode="indeterminate" color="warn"></mat-progress-bar>
 <div class="homepage-container">
   <mat-accordion class="accordion">
     <!-- <mat-expansion-panel *ngFor="let city of currentWeatherResponse" class="expansion-panel"> -->
@@ -9,8 +10,16 @@
           {{ weather.cityName }}
         </mat-panel-title>
         <mat-panel-description class="panel-description">
-          <span>Avergae Temperature: {{ weather.averageTemperature + weather.averageTemperature }}</span>
-          <span>Wind Speed: {{ weather.windStrength + weather.windStrength }}</span>
+          <span>Avergae Temperature:
+            <span class="temperature-value">
+              {{ (weather.averageTemperature | number: '1.2-2') + ' ' + temperatureUnit }}
+            </span>
+          </span>
+          <span>Wind Speed:
+            <span class="wind-strength-value">
+              {{ (weather.windStrength | number: '1.2-2') + ' ' + windStrengthUnit }}
+            </span>
+          </span>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <!-- this loads the hourly forecast upon clicking on the city -->
@@ -20,5 +29,3 @@
     </mat-expansion-panel>
   </mat-accordion>
 </div>
-
-<pre>{{citiesFormArray.value | json}}</pre>

@@ -4,6 +4,13 @@ mat-spinner {
   margin: functions.compute-pixel(2) auto;
 }
 
-.forecast-table {
-  width: 100%;
+.forecast {
+  &__table {
+    width: 100%;
+  }
+
+  &__toolbar {
+    height: functions.compute-pixel(6);
+    font-weight: 100;
+  }
 }

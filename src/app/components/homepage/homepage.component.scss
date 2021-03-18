@@ -18,6 +18,11 @@
     .panel-description {
       display: flex;
       justify-content: space-between;
+
+      .temperature-value,
+      .wind-strength-value {
+        color: white;
+      }
     }
   }
 }

@@ -6,6 +6,8 @@ import { WeatherDataService } from 'src/app/services/weather-data.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { GlobalConstants } from 'src/app/global-constants';
+import { UnitSelectorService } from 'src/app/services/unit-selector.service';
+import { TemperatureUnits, Unit, WindStrengthUnits } from 'src/app/enums/global.enum';
 
 @Component({
   selector: 'app-forecast',
@@ -17,6 +19,8 @@ export class ForecastComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() unit!: 'someUnit'; // TODO: create enum
   hourlyForecastMappedList!: Array<HourlyForecastMapped>;
   showSpinner = true;
+  temperatureUnit!: TemperatureUnits;
+  windStrengthUnit!: WindStrengthUnits;
   tableData = {
     displayedColumns: GlobalConstants.forecastDisplayedColumns,
     dataSource: new MatTableDataSource<HourlyForecastMapped>([])
@@ -24,24 +28,35 @@ export class ForecastComponent implements OnInit, OnDestroy, AfterViewInit {
   private unsubscribe$ = new Subject();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private weatherDataService: WeatherDataService) { }
+  constructor(
+    private weatherDataService: WeatherDataService,
+    private unitSelectorService: UnitSelectorService
+  ) { }
 
   ngOnInit(): void {
-    this.initForecastData();
+    this.unitSelectorService.selectedUnit$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((selectedUnit: Unit) => {
+        this.showSpinner = true;
+        this.initForecastData(selectedUnit);
+      });
   }
 
   ngAfterViewInit(): void {
     this.tableData.dataSource.paginator = this.paginator;
   }
 
-  private initForecastData(): void {
-    this.weatherDataService.getHourlyWeatherData(this.coordinates)
+  private initForecastData(unit: Unit): void {
+
+    this.weatherDataService.getHourlyWeatherData(this.coordinates, unit)
       .pipe(
         delay(2000), // just to show spinner
         map((response: HourlyForecastResponse) => this.mapHourlyForecastResponse(response)),
         takeUntil(this.unsubscribe$))
       .subscribe((mappedResponse: Array<HourlyForecastMapped>) => {
         this.tableData.dataSource.data = mappedResponse;
+        this.temperatureUnit = TemperatureUnits[unit];
+        this.windStrengthUnit = WindStrengthUnits[unit];
         this.showSpinner = false;
       });
   }
