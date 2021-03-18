@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl } from '@angular/forms';
-import { forkJoin, Subject } from 'rxjs';
-import { delay, map, takeUntil } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { forkJoin, Observable, Subject } from 'rxjs';
+import { delay, filter, map, skip, takeUntil, tap } from 'rxjs/operators';
 import { TemperatureUnits, Unit, WindStrengthUnits } from 'src/app/enums/global.enum';
 import { CurrentWeatherResponse, CurrentWeatherMapped } from 'src/app/interfaces';
 import { UnitSelectorService } from 'src/app/services/unit-selector.service';
@@ -24,7 +25,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   constructor(
     private weatherDataService: WeatherDataService,
-    private unitSelectorService: UnitSelectorService
+    private unitSelectorService: UnitSelectorService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -41,23 +43,29 @@ export class HomepageComponent implements OnInit, OnDestroy {
   }
 
   private initWeatherData(unit: Unit): void {
-    forkJoin(
+    const mappedResponse$: Observable<CurrentWeatherMapped[]> = forkJoin(
       this.citiesList.map((cityName) => this.weatherDataService.getCurrentWeatherData(cityName, unit)
         .pipe(
           // map the api response as per the frontend requirement
           map((response: CurrentWeatherResponse) => this.mapCurrentWeatherResponse(cityName, response, unit))
         ))
-    )
+    );
+
+    mappedResponse$
       .pipe(
-        delay(2000), // just to show loader
-        takeUntil(this.unsubscribe$)
+        takeUntil(this.unsubscribe$),
+        delay(2000), // just to show loader in UI
       )
       .subscribe((mappedResponse: Array<CurrentWeatherMapped>) => {
         this.currentWeatherMappedList = mappedResponse;
         this.temperatureUnit = TemperatureUnits[unit];
         this.windStrengthUnit = WindStrengthUnits[unit];
+        this.snackBar.open(`Selected unit: ${unit.toUpperCase()}`, 'OK', {
+          duration: 4000,
+        });
         this.showLoader = false;
       });
+
   }
 
   private mapCurrentWeatherResponse(cityName: string, response: CurrentWeatherResponse, unit: Unit): CurrentWeatherMapped {
