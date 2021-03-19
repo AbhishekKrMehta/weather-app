@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 This is a weather application that uses the [Ppenweather API](https://openweathermap.org/api) to display weather data.
 This uses Angular 11 to make the frontend.
-A demo can be seen at `https://abhishekkrmehta.github.io/weather-app/`
+A demo can be seen at [https://abhishekkrmehta.github.io/weather-app/](https://abhishekkrmehta.github.io/weather-app/)
 ![Alt text](src/assets/images/app-screenshot.jpg "App")
 
 ## Development server
@@ -17,7 +17,7 @@ A demo can be seen at `https://abhishekkrmehta.github.io/weather-app/`
 
 ## Deployment
 
-This application is deployed using github pages on `https://abhishekkrmehta.github.io/weather-app/`.
+This application is deployed using github pages on [https://abhishekkrmehta.github.io/weather-app/](https://abhishekkrmehta.github.io/weather-app/).
 
 ## Can be improved
 
