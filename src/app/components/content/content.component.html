@@ -23,6 +23,17 @@
 
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="side" opened class="sidenav" fixedInViewport="false">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/home" routerLinkActive="active">Home</a>
+      <mat-divider></mat-divider>
+
+      <a mat-list-item routerLink="/daily-forecast" routerLinkActive="active">Daily forecast</a>
+      <mat-divider></mat-divider>
+
+      <a mat-list-item routerLink="/some-broken-url" routerLinkActive="active">Invalid URL (demo)</a>
+      <mat-divider></mat-divider>
+
+    </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content>

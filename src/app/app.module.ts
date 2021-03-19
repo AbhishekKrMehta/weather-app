@@ -12,6 +12,8 @@ import { WeatherDataService } from './services/weather-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ForecastComponent } from './components/forecast/forecast.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DailyForecastComponent } from './components/daily-forecast/daily-forecast.component';
+import { InvalidRouteComponent } from './components/invalid-route/invalid-route.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ContentComponent,
     HomepageComponent,
     ForecastComponent,
+    DailyForecastComponent,
+    InvalidRouteComponent,
     FooterComponent
   ],
   imports: [

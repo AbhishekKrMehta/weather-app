@@ -48,7 +48,7 @@ export class ForecastComponent implements OnInit, OnDestroy, AfterViewInit {
   private initForecastData(unit: Unit): void {
     this.weatherDataService.getHourlyWeatherData(this.coordinates, unit)
       .pipe(
-        // delay(2000), // just to show spinner
+        delay(2000), // just to show spinner
         map((response: HourlyForecastResponse) => this.mapHourlyForecastResponse(response)),
         takeUntil(this.unsubscribe$))
       .subscribe((mappedResponse: Array<HourlyForecastMapped>) => {
