@@ -19,6 +19,19 @@ A demo can be seen at [https://abhishekkrmehta.github.io/weather-app/](https://a
 
 This application is deployed using github pages on [https://abhishekkrmehta.github.io/weather-app/](https://abhishekkrmehta.github.io/weather-app/).
 
+## App contains
+
+- AppComponent: Root component,
+- ContentComponent: It contains Header and router outlet,
+- HomepageComponent: Shows the landing page with weather data,
+- ForecastComponent: Shows the hourly forecast,
+- DailyForecastComponent: still WIP,
+- InvalidRouteComponent: Wildcard route component,
+- FooterComponent: Contains the footer
+
+- UnitSelectorService: Contains Behaviour subject that emits value when ever the unit changes
+- WeatherDataService: Contains the methods that fetch weather data
+
 ## Can be improved
 
 - make the app responsive
@@ -28,6 +41,9 @@ This application is deployed using github pages on [https://abhishekkrmehta.gith
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+Unit test overview:
+![Alt text](src/assets/images/test-screenshot.jpg "Test overview")
 
 ## Author
 
