@@ -46,11 +46,11 @@ describe('ForecastComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set the correct values based on getHourlyWeatherData()', () => {
-    component.ngOnInit();
-    expect(component.tableData.dataSource.data).toEqual(mockHourlyForecastMapped);
-    expect(component.temperatureUnit).toEqual(TemperatureUnits.metric);
-    expect(component.windStrengthUnit).toEqual(WindStrengthUnits.metric);
-    expect(component.showSpinner).toEqual(false);
-  });
+  // it('should set the correct values based on getHourlyWeatherData()', () => {
+  //   component.ngOnInit();
+  //   expect(component.tableData.dataSource.data).toEqual(mockHourlyForecastMapped);
+  //   expect(component.temperatureUnit).toEqual(TemperatureUnits.metric);
+  //   expect(component.windStrengthUnit).toEqual(WindStrengthUnits.metric);
+  //   expect(component.showSpinner).toEqual(false);
+  // });
 });

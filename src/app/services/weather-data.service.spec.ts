@@ -34,7 +34,7 @@ describe('WeatherDataService', () => {
       expect(weatherData.wind).toBeTruthy();
       expect(weatherData).toEqual(mockWeatherData);
     });
-    const request = httpMock.expectOne(`http://api.openweathermap.org/data/2.5/weather?q=Amsterdam&appid=${GlobalConstants.apiKey}&units=${Unit.metric}`);
+    const request = httpMock.expectOne(`https://api.openweathermap.org/data/2.5/weather?q=Amsterdam&appid=${GlobalConstants.apiKey}&units=${Unit.metric}`);
     expect(request.request.method).toBe('GET');
     request.flush(mockWeatherData);
   });
