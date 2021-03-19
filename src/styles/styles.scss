@@ -1,5 +1,3 @@
-// TODO: remove unused @use
-
 @use '~src/styles/colors';
 @use '~src/styles/functions';
 @use '~src/styles/mixins';
@@ -21,8 +19,7 @@ body {
 
 @import '~@angular/material/theming';
 // define a custom typography config
-// $font-family: "Copperplate, ' Copperplate Gothic Light ', fantasy, Roboto, monospace", // TODO
 $custom-typography: mat-typography-config(
-  $font-family: ' Roboto, monospace',
+  $font-family: "Copperplate, ' Copperplate Gothic Light ', fantasy, Roboto, monospace",
 );
 @include mat-core($custom-typography);

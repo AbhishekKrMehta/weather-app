@@ -18,7 +18,7 @@ export class WeatherDataService {
 
     return this.http.get<CurrentWeatherResponse>(currentWeatherUrl)
       .pipe(
-        retry(2),
+        retry(2), // retry to fetch data in case of error
         catchError(this.handleError)
       );
   }
@@ -31,7 +31,6 @@ export class WeatherDataService {
         catchError(this.handleError)
       );
   }
-  // TODO: write test
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.error instanceof ErrorEvent) {
