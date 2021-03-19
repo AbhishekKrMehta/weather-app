@@ -21,16 +21,16 @@ This application is deployed using github pages on [https://abhishekkrmehta.gith
 
 ## App contains
 
-- AppComponent: Root component,
-- ContentComponent: It contains Header and router outlet,
-- HomepageComponent: Shows the landing page with weather data,
-- ForecastComponent: Shows the hourly forecast,
-- DailyForecastComponent: still WIP,
-- InvalidRouteComponent: Wildcard route component,
-- FooterComponent: Contains the footer
+- **AppComponent**: Root component
+- **ContentComponent**: It contains Header and router outlet
+- **HomepageComponent**: Shows the landing page with weather data
+- **ForecastComponent**: Shows the hourly forecast
+- **DailyForecastComponent**: still WIP
+- **InvalidRouteComponent**: Wildcard route component
+- **FooterComponent**: Contains the footer
 
-- UnitSelectorService: Contains Behaviour subject that emits value when ever the unit changes
-- WeatherDataService: Contains the methods that fetch weather data
+- **UnitSelectorService**: Contains Behaviour subject that emits value when ever the unit changes
+- **WeatherDataService**: Contains the methods that fetch weather data
 
 ## Can be improved
 
@@ -48,4 +48,4 @@ Unit test overview:
 ## Author
 
 This app was built by Abhishek.
-You can view my portfolio site at: `http://abhishekmehta.co/`
+You can view my portfolio site at: [http://abhishekmehta.co/](http://abhishekmehta.co/)
