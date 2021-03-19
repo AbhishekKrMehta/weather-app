@@ -1,27 +1,35 @@
-# WeatherApp
+# Weather Application
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.4.
 
+## Summary
+
+This is a weather application that uses the [Ppenweather API](https://openweathermap.org/api) to display weather data.
+This uses Angular 11 to make the frontend.
+A demo can be seen at `https://abhishekkrmehta.github.io/weather-app/`
+![Alt text](src/assets/images/app-screenshot.jpg "App")
+
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Install Angular CLI and Node.js
+- Navigate to the project directory and run `npm install`
+- Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Deployment
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+This application is deployed using github pages on `https://abhishekkrmehta.github.io/weather-app/`.
 
-## Build
+## Can be improved
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- make the app responsive
+- improve unit test coverage
+- remove unusedd imports/variables
 
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Author
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+This app was built by Abhishek.
+You can view my portfolio site at: `http://abhishekmehta.co/`

@@ -14,7 +14,7 @@ export class WeatherDataService {
   constructor(private http: HttpClient) { }
 
   public getCurrentWeatherData(cityName: string, unit: Unit = Unit.metric): Observable<CurrentWeatherResponse> {
-    const currentWeatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${GlobalConstants.apiKey}&units=${unit}`;
+    const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${GlobalConstants.apiKey}&units=${unit}`;
 
     return this.http.get<CurrentWeatherResponse>(currentWeatherUrl)
       .pipe(
