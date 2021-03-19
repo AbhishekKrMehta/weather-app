@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormArray, FormControl } from '@angular/forms';
+import { FormArray } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { forkJoin, Observable, Subject } from 'rxjs';
-import { delay, filter, map, skip, takeUntil, tap } from 'rxjs/operators';
+import { delay, map, takeUntil } from 'rxjs/operators';
 import { TemperatureUnits, Unit, WindStrengthUnits } from 'src/app/enums/global.enum';
 import { CurrentWeatherResponse, CurrentWeatherMapped } from 'src/app/interfaces';
 import { UnitSelectorService } from 'src/app/services/unit-selector.service';

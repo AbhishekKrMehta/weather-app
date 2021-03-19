@@ -3,8 +3,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatTableModule } from '@angular/material/table';
 import { of } from 'rxjs';
-import { TemperatureUnits, Unit, WindStrengthUnits } from 'src/app/enums/global.enum';
-import { mockHourlyForecastMapped, mockHourlyForecastResponse } from 'src/app/mock-data';
+import { Unit } from 'src/app/enums/global.enum';
+import { mockHourlyForecastResponse } from 'src/app/mock-data';
 import { UnitSelectorService } from 'src/app/services/unit-selector.service';
 import { WeatherDataService } from 'src/app/services/weather-data.service';
 

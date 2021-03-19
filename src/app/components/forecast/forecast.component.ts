@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { pipe, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { delay, map, takeUntil } from 'rxjs/operators';
 import { Coordinates, HourlyForecastMapped, HourlyForecastResponse } from 'src/app/interfaces';
 import { WeatherDataService } from 'src/app/services/weather-data.service';

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { InvalidRouteComponent } from './invalid-route.component';
 
 describe('InvalidRouteComponent', () => {
@@ -8,9 +7,9 @@ describe('InvalidRouteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InvalidRouteComponent ]
+      declarations: [InvalidRouteComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
