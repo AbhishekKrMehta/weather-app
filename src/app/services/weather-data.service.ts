@@ -21,48 +21,6 @@ export class WeatherDataService {
         retry(2),
         catchError(this.handleError)
       );
-    return of({
-      coord: {
-        lon: 4.8897,
-        lat: 52.374
-      },
-      weather: [{
-        id: 803,
-        main: 'Clouds',
-        description: 'broken clouds',
-        icon: '04d'
-      }],
-      base: 'stations',
-      main: {
-        temp: 280.58,
-        feels_like: 273.93,
-        temp_min: 279.82,
-        temp_max: 280.93,
-        pressure: 1008,
-        humidity: 81
-      },
-      visibility: 10000,
-      wind: {
-        speed: 7.72,
-        deg: 290
-      },
-      clouds: {
-        all: 75
-      },
-      dt: 1615716401,
-      sys: {
-        type: 1,
-        id: 1524,
-        country: 'NL',
-        sunrise: 1615701420,
-        sunset: 1615743743
-      },
-      timezone: 3600,
-      id: 2759794,
-      name: 'Amsterdam',
-      cod: 200
-    });
-
   }
 
   public getHourlyWeatherData({ latitude, longitude }: Coordinates, unit: Unit = Unit.metric): Observable<HourlyForecastResponse> {
@@ -73,6 +31,7 @@ export class WeatherDataService {
         catchError(this.handleError)
       );
   }
+  // TODO: write test
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     if (error.error instanceof ErrorEvent) {

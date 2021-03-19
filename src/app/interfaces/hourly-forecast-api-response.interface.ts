@@ -31,16 +31,9 @@ interface Current {
 
 interface Weather {
   id: number;
-  main: Main;
+  main: string;
   description: string;
   icon: string;
-}
-
-enum Main {
-  Clear = 'Clear',
-  Clouds = 'Clouds',
-  Mist = 'Mist',
-  Rain = 'Rain',
 }
 
 interface Daily {

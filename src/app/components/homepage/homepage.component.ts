@@ -16,7 +16,7 @@ import { WeatherDataService } from 'src/app/services/weather-data.service';
 
 export class HomepageComponent implements OnInit, OnDestroy {
   currentWeatherMappedList!: Array<CurrentWeatherMapped>;
-  citiesList: string[] = ['Amsterdam', 'Woodinville', 'Krasnoyarsk', 'Stockholm', 'Beijing'];
+  citiesList: string[] = ['Amsterdam', 'Rome', 'Prague', 'Berlin', 'Paris'];
   citiesFormArray = new FormArray([]);
   temperatureUnit!: TemperatureUnits;
   windStrengthUnit!: WindStrengthUnits;
@@ -36,10 +36,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
         this.showLoader = true;
         this.initWeatherData(selectedUnit);
       });
-
-    // this.citiesList.forEach(city => {
-    //   this.citiesFormArray.push(new FormControl(''));
-    // });
   }
 
   private initWeatherData(unit: Unit): void {
@@ -47,7 +43,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
       this.citiesList.map((cityName) => this.weatherDataService.getCurrentWeatherData(cityName, unit)
         .pipe(
           // map the api response as per the frontend requirement
-          map((response: CurrentWeatherResponse) => this.mapCurrentWeatherResponse(cityName, response, unit))
+          map((response: CurrentWeatherResponse) => this.mapCurrentWeatherResponse(cityName, response))
         ))
     );
 
@@ -65,10 +61,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
         });
         this.showLoader = false;
       });
-
   }
 
-  private mapCurrentWeatherResponse(cityName: string, response: CurrentWeatherResponse, unit: Unit): CurrentWeatherMapped {
+  private mapCurrentWeatherResponse(cityName: string, response: CurrentWeatherResponse): CurrentWeatherMapped {
     return {
       cityName,
       averageTemperature: (response.main.temp_min + response.main.temp_max) / 2,

@@ -16,7 +16,6 @@ import { TemperatureUnits, Unit, WindStrengthUnits } from 'src/app/enums/global.
 })
 export class ForecastComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() coordinates!: Coordinates;
-  @Input() unit!: 'someUnit'; // TODO: create enum
   hourlyForecastMappedList!: Array<HourlyForecastMapped>;
   showSpinner = true;
   temperatureUnit!: TemperatureUnits;
@@ -47,10 +46,9 @@ export class ForecastComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private initForecastData(unit: Unit): void {
-
     this.weatherDataService.getHourlyWeatherData(this.coordinates, unit)
       .pipe(
-        delay(2000), // just to show spinner
+        // delay(2000), // just to show spinner
         map((response: HourlyForecastResponse) => this.mapHourlyForecastResponse(response)),
         takeUntil(this.unsubscribe$))
       .subscribe((mappedResponse: Array<HourlyForecastMapped>) => {

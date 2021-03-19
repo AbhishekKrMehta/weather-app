@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Unit } from 'src/app/enums/global.enum';
+import { GlobalConstants } from 'src/app/global-constants';
 import { UnitSelectorService } from 'src/app/services/unit-selector.service';
 
 @Component({
@@ -11,19 +12,8 @@ import { UnitSelectorService } from 'src/app/services/unit-selector.service';
   styleUrls: ['./content.component.scss']
 })
 export class ContentComponent implements OnInit, OnDestroy {
-  unitList = [{
-    name: 'Standard',
-    value: 'standard'
-  },
-  {
-    name: 'Metric',
-    value: 'metric'
-  }, {
-    name: 'Imperial',
-    value: 'imperial'
-  }];
-  unitControl = new FormControl(this.unitList[1].value); // select default unit as metric
-  showLoader = true; // TODO: use it
+  unitList = GlobalConstants.unitList;
+  unitControl = new FormControl(this.unitList[1].value); // to select default unit as metric
   private unsubscribe$ = new Subject();
 
   constructor(private unitSelectorService: UnitSelectorService) { }
